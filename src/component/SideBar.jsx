@@ -1,13 +1,16 @@
-import { createContext, useContext, useState } from "react";
+
 import { GoSidebarCollapse } from "react-icons/go";
 import { IoMdMore } from "react-icons/io";
 
 
-export const SidebarContext = createContext();
 
 
-const SideBar = ({ children }) => {
-    const [expanded,setExpanded] = useState(true)
+
+
+
+
+const SideBar = ({ children,expanded,setExpanded }) => {
+ 
   return (
     <div>
       <aside className="h-screen">
@@ -30,9 +33,8 @@ const SideBar = ({ children }) => {
           </div>
 
           {/* nav-link */}
-          <SidebarContext.Provider value={{expanded}}>
-            <ul className="flex-1 px-3  w-full">{children}</ul>
-          </SidebarContext.Provider>
+      
+            <ul className="flex-1 px-3 overflow-auto  w-full">{children}</ul>
 
           {/* user */}
           <div className="border-t justify-between flex p-3">
@@ -64,8 +66,7 @@ export default SideBar;
 
 // sideBar Item
 
-const SideBarItem = ({ icon, text, active, alert }) => {
-    const { expanded } = useContext(SidebarContext);
+const SideBarItem = ({ icon, text, active, alert, expanded, }) => {
   return (
     <div>
       <li
@@ -75,8 +76,14 @@ const SideBarItem = ({ icon, text, active, alert }) => {
             : "hover:bg-indigo-50 text-gray-600"
         } `}
       >
-        {icon}
-        <div className={` overflow-hidden transition-all ease-linear duration-200 ${expanded ? "w-52 ml-3" : "w-0"}`}>{text}</div>
+        <div className={``}>{icon}</div>
+        <div
+          className={` overflow-hidden transition-all ease-linear duration-200 ${
+            expanded ? "w-52 ml-3" : "w-0"
+          }`}
+        >
+          {text}
+        </div>
         {alert && (
           <div
             className={` absolute  ${
@@ -87,7 +94,7 @@ const SideBarItem = ({ icon, text, active, alert }) => {
       </li>
     </div>
   );
-}
+};
 
 export { SideBarItem };
 
