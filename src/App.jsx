@@ -1,4 +1,6 @@
-import SideBar from "./component/SideBar"
+import { useContext } from "react";
+import SideBar, { SidebarContext, SideBarItem } from "./component/SideBar"
+import { MdOutlineDashboardCustomize } from "react-icons/md";
 
 
 function App() {
@@ -8,7 +10,11 @@ function App() {
     <div className="flex">
       <div className="w-3/12">
         <SideBar>
-          h
+          <SideBarItem
+            icon={<MdOutlineDashboardCustomize />}
+            text={"Dashboard"}
+            alert
+          />
         </SideBar>
       </div>
       <div className=""></div>
